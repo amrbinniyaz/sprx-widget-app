@@ -1,0 +1,88 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { CheckCircle2 } from "lucide-react";
+
+const steps = [
+  { label: "Choose plan", path: "/onboarding/welcome" },
+  { label: "Connect channel", path: "/onboarding/channel" },
+  { label: "Create story", path: "/onboarding/story" },
+  { label: "Build widget", path: "/onboarding/widget" },
+];
+
+export default function OnboardingLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const currentIndex = steps.findIndex((s) => pathname.startsWith(s.path));
+
+  return (
+    <div className="min-h-screen bg-[#F8FAFC] flex flex-col relative overflow-hidden font-sans">
+      {/* Universal Light Dynamic Background for Onboarding */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40rem] sm:w-[60rem] h-[40rem] sm:h-[60rem] bg-purple-200/50 rounded-full mix-blend-multiply filter blur-[100px] sm:blur-[140px] opacity-60 animate-blob" />
+        <div className="absolute top-[20%] right-[-10%] w-[30rem] sm:w-[50rem] h-[30rem] sm:h-[50rem] bg-indigo-200/50 rounded-full mix-blend-multiply filter blur-[100px] sm:blur-[140px] opacity-60 animate-blob animation-delay-2000" />
+        <div className="absolute -bottom-[20%] left-[20%] w-[45rem] sm:w-[65rem] h-[45rem] sm:h-[65rem] bg-pink-200/40 rounded-full mix-blend-multiply filter blur-[100px] sm:blur-[150px] opacity-50 animate-blob animation-delay-4000" />
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgbZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMzYgMzRoMjR2MjRIMzZWMzR6TTI0IDM2VjM2aC0yMnYtMjJIMjRnIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS1vcGFjaXR5PSIwLjAyIiBzdHJva2Utd2lkdGg9IjIiLz48L2c+PC9zdmc+')] opacity-60 mix-blend-overlay" />
+      </div>
+
+      {/* Top bar */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/60 backdrop-blur-2xl border-b border-white/50 shadow-[0_4px_30px_rgba(0,0,0,0.02)]">
+        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-[8px] bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center p-[1px] shadow-sm">
+              <div className="w-full h-full bg-white rounded-[7px] flex items-center justify-center">
+                <span className="text-purple-600 font-bold text-xs leading-none">S</span>
+              </div>
+            </div>
+            <span className="text-xl font-bold tracking-tight text-zinc-900">
+              SprX<sup className="text-[10px] text-zinc-400 ml-0.5 font-normal">TM</sup>
+            </span>
+          </Link>
+
+          {/* Steps */}
+          <div className="hidden md:flex items-center gap-1">
+            {steps.map((step, i) => {
+              const done = i < currentIndex;
+              const active = i === currentIndex;
+              return (
+                <div key={i} className="flex items-center">
+                  <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
+                    active ? "bg-white/80 text-purple-600 shadow-sm border border-white/50" :
+                    done ? "text-zinc-500 hover:text-zinc-700" : "text-zinc-400"
+                  }`}>
+                    {done ? (
+                      <CheckCircle2 size={14} className="text-purple-500" />
+                    ) : (
+                      <span className={`w-[18px] h-[18px] rounded-full flex items-center justify-center text-[9px] border ${
+                        active ? "border-purple-600 bg-purple-600 text-white shadow-sm" : "border-zinc-300 text-zinc-400"
+                      }`}>{i + 1}</span>
+                    )}
+                    {step.label}
+                  </div>
+                  {i < steps.length - 1 && (
+                    <div className={`w-8 h-[2px] mx-1 rounded-full transition-colors duration-500 ${i < currentIndex ? "bg-purple-600/30" : "bg-zinc-200/50"}`} />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="md:hidden text-xs font-semibold text-zinc-500 tracking-wide uppercase">Step {currentIndex + 1} of {steps.length}</div>
+          <p className="text-xs text-zinc-500 hidden sm:block font-medium">Need help? <span className="text-purple-600 hover:text-purple-700 cursor-pointer font-bold border-b border-purple-200 hover:border-purple-400 pb-0.5 transition-colors">Chat with us</span></p>
+        </div>
+
+        {/* Progress bar */}
+        <div className="h-[2px] bg-zinc-100/50">
+          <div
+            className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 transition-all duration-700 ease-in-out relative"
+            style={{ width: `${((currentIndex + 1) / steps.length) * 100}%` }}
+          >
+            <div className="absolute top-0 right-0 bottom-0 w-10 bg-gradient-to-r from-transparent to-white/50" />
+          </div>
+        </div>
+      </header>
+
+      <main className="flex-1 pt-24 pb-12 px-4 relative z-10">{children}</main>
+    </div>
+  );
+}
