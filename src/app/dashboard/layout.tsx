@@ -28,14 +28,24 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-zinc-50">
-      <Sidebar />
-      <Header />
-      <main className="ml-[240px] pt-16 min-h-screen">
-        <div className="p-6 lg:p-8">
-          {children}
+    <div className="min-h-screen bg-[#FAFAFC] relative overflow-hidden flex">
+      {/* Background Blobs (shared from Onboarding vibe) */}
+      <div className="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-200/40 rounded-full blur-[120px] mix-blend-multiply opacity-70 animate-blob pointer-events-none z-0" />
+      <div className="fixed top-[20%] right-[-10%] w-[35%] h-[35%] bg-teal-200/40 rounded-full blur-[100px] mix-blend-multiply opacity-70 animate-blob animation-delay-2000 pointer-events-none z-0" />
+      <div className="fixed bottom-[-10%] left-[20%] w-[40%] h-[40%] bg-pink-200/40 rounded-full blur-[120px] mix-blend-multiply opacity-70 animate-blob animation-delay-4000 pointer-events-none z-0" />
+
+      {/* Main Dashboard UI layer */}
+      <div className="relative z-10 flex w-full">
+        <Sidebar />
+        <div className="flex-1 flex flex-col ml-[280px]">
+          <Header />
+          <main className="flex-1 w-full p-8 pt-[120px] min-h-screen">
+            <div className="max-w-[1600px] mx-auto">
+              {children}
+            </div>
+          </main>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { useAuth } from "@/context/auth-context";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -56,15 +57,8 @@ export default function LoginPage() {
         {/* Left Side: Brand Context */}
         <div className="hidden md:flex flex-col justify-between w-5/12 p-10 lg:p-14 bg-gradient-to-br from-white/40 to-white/10 border-r border-white/50 relative overflow-hidden">
           <div className="relative z-10">
-            <div className="flex items-center gap-2.5 mb-14">
-              <div className="w-9 h-9 rounded-[10px] bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center p-[1px] shadow-sm">
-                <div className="w-full h-full bg-white rounded-[9px] flex items-center justify-center">
-                  <span className="text-purple-600 font-bold text-base leading-none">S</span>
-                </div>
-              </div>
-              <span className="text-2xl font-bold tracking-tight text-zinc-900">
-                SprX<sup className="text-xs text-zinc-400 ml-0.5 font-normal">TM</sup>
-              </span>
+            <div className="mb-14">
+              <Image src="/SprXstories-Logo.png" alt="SprX Stories" width={160} height={54} className="h-10 w-auto" />
             </div>
             
             <h2 className="text-4xl font-light text-zinc-800 leading-[1.15] mb-8">
@@ -113,13 +107,8 @@ export default function LoginPage() {
 
         {/* Right Side: Form */}
         <div className="w-full md:w-7/12 p-8 sm:p-10 lg:p-14 relative z-10 bg-white/40 flex flex-col justify-center">
-          <div className="md:hidden flex items-center gap-2 mb-10">
-             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center p-[1px] shadow-sm">
-               <div className="w-full h-full bg-white rounded-[7px] flex items-center justify-center">
-                 <span className="text-purple-600 font-bold text-sm">S</span>
-               </div>
-             </div>
-             <span className="text-2xl font-bold tracking-tight text-zinc-900">SprX</span>
+          <div className="md:hidden mb-10">
+            <Image src="/SprXstories-Logo.png" alt="SprX Stories" width={140} height={48} className="h-8 w-auto" />
           </div>
 
           <div className="mb-10">

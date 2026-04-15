@@ -31,6 +31,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const stored = localStorage.getItem("sprx_user");
     if (stored) {
       setUser(JSON.parse(stored));
+    } else {
+      // Auto-login for local development/previewing
+      setUser(mockUser);
+      localStorage.setItem("sprx_user", JSON.stringify(mockUser));
     }
     setIsLoading(false);
   }, []);

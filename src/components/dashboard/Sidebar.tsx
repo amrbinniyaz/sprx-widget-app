@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/auth-context";
 import { LayoutDashboard, Radio, BookOpen, Puzzle, BarChart3, Settings, LogOut, Zap, ChevronRight } from "lucide-react";
@@ -32,25 +33,16 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="fixed left-0 top-0 bottom-0 w-[240px] flex flex-col bg-sidebar border-r border-sidebar-border z-40">
+    <aside className="fixed left-6 top-6 bottom-6 w-[250px] flex flex-col bg-white/60 backdrop-blur-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 z-40 rounded-[24px] overflow-hidden">
       {/* Logo */}
-      <div className="px-5 py-5 border-b border-zinc-200">
-        <Link href="/dashboard" className="flex items-center gap-2">
-          <span className="text-xl font-bold tracking-tight">
-            Spr<span className="text-gradient">X</span>
-            <sup className="text-[10px] text-zinc-400 ml-0.5">TM</sup>
-          </span>
+      <div className="px-6 py-8">
+        <Link href="/dashboard">
+          <Image src="/SprXstories-Logo.png" alt="SprX Stories" width={150} height={50} className="h-9 w-auto" priority />
         </Link>
-        {user && (
-          <div className="mt-3 px-3 py-2.5 rounded-xl bg-zinc-100 border border-zinc-200">
-            <p className="text-xs font-semibold text-zinc-800 truncate">{user.school}</p>
-            <p className="text-[10px] text-zinc-400 truncate">{user.email}</p>
-          </div>
-        )}
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
+      <nav className="flex-1 px-4 py-2 space-y-1.5 overflow-y-auto custom-scrollbar">
         {navItems.map((item) => {
           const Icon = item.icon;
           const active = isActive(item);
@@ -58,45 +50,48 @@ export default function Sidebar() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 group ${
+              className={`flex items-center gap-3.5 px-4 py-3 rounded-[14px] text-[13px] font-semibold transition-all duration-300 group relative overflow-hidden ${
                 active
-                  ? "bg-purple-50 text-purple-700 border border-purple-100"
-                  : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100"
+                  ? "bg-purple-600/10 text-purple-700 shadow-sm"
+                  : "text-zinc-500 hover:text-zinc-900 hover:bg-white/60"
               }`}
             >
-              <Icon size={16} className={active ? "text-brand-purple" : "text-zinc-400 group-hover:text-zinc-600"} />
+              {active && <div className="absolute left-0 top-0 bottom-0 w-1 bg-purple-600 rounded-r-md" />}
+              <Icon size={16} className={active ? "text-purple-600" : "text-zinc-400 group-hover:text-zinc-600 transition-colors"} />
               {item.label}
-              {active && <ChevronRight size={12} className="ml-auto text-purple-400" />}
             </Link>
           );
         })}
       </nav>
 
-      {/* Bottom */}
-      <div className="px-3 pb-4 space-y-2">
+      {/* Bottom Profile Header */}
+      <div className="p-4 space-y-3">
         {/* Plan badge */}
-        <div className="mx-1 p-3 rounded-xl bg-purple-50 border border-purple-100">
-          <div className="flex items-center gap-2 mb-1.5">
-            <Zap size={12} className="text-brand-purple" />
-            <span className="text-xs font-semibold text-purple-700">{user?.plan || "Growth"} Plan</span>
+        <div className="p-4 rounded-2xl bg-gradient-to-br from-purple-50 to-teal-50 border border-white/80 shadow-sm relative overflow-hidden">
+          <div className="absolute top-0 right-0 p-2 opacity-10">
+             <Zap size={40} className="text-purple-600" />
           </div>
-          <p className="text-[10px] text-zinc-400 mb-2">5 / 8 modules active</p>
-          <div className="h-1.5 bg-purple-100 rounded-full overflow-hidden">
-            <div className="h-full w-[62%] bg-gradient-to-r from-brand-purple to-brand-teal rounded-full" />
+          <div className="relative z-10">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-[13px] font-bold text-zinc-800">{user?.plan || "Growth"} Plan</span>
+            </div>
+            <div className="h-1.5 bg-white rounded-full overflow-hidden mb-2">
+              <div className="h-full w-[62%] bg-gradient-to-r from-purple-500 to-teal-400 rounded-full" />
+            </div>
+            <p className="text-[10px] text-zinc-500 font-medium pb-2">5 / 8 modules active</p>
           </div>
-          <button className="mt-2 text-[10px] text-brand-purple hover:text-purple-700 transition-colors font-medium">Upgrade plan →</button>
         </div>
 
-        {/* User + logout */}
-        <div className="flex items-center gap-2 px-2 py-2 rounded-xl hover:bg-zinc-100 transition-colors group cursor-pointer" onClick={handleLogout}>
-          <div className="w-7 h-7 rounded-full bg-gradient-to-br from-purple-400 to-teal-400 flex items-center justify-center text-xs font-bold text-white flex-shrink-0">
-            {user?.firstName?.[0] || "U"}
+        {/* User Account */}
+        <div className="flex items-center gap-3 px-3 py-2.5 rounded-2xl hover:bg-white/60 cursor-pointer transition-all border border-transparent hover:border-white/40 hover:shadow-sm" onClick={handleLogout}>
+          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-teal-400 flex items-center justify-center shadow-inner">
+             <span className="text-white text-[13px] font-bold">{user?.firstName?.[0] || "U"}</span>
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-xs font-medium text-zinc-700 truncate">{user?.name || "User"}</p>
-            <p className="text-[10px] text-zinc-400 truncate">{user?.role}</p>
+            <p className="text-[13px] font-bold text-zinc-800 truncate">{user?.name || "User"}</p>
+            <p className="text-[10px] text-zinc-500 truncate">{user?.school}</p>
           </div>
-          <LogOut size={13} className="text-zinc-400 group-hover:text-zinc-600 flex-shrink-0 transition-colors" />
+          <LogOut size={14} className="text-zinc-400" />
         </div>
       </div>
     </aside>

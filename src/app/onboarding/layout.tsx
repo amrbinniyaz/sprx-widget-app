@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { CheckCircle2 } from "lucide-react";
 
 const steps = [
@@ -28,15 +29,8 @@ export default function OnboardingLayout({ children }: { children: React.ReactNo
       {/* Top bar */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/60 backdrop-blur-2xl border-b border-white/50 shadow-[0_4px_30px_rgba(0,0,0,0.02)]">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-[8px] bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center p-[1px] shadow-sm">
-              <div className="w-full h-full bg-white rounded-[7px] flex items-center justify-center">
-                <span className="text-purple-600 font-bold text-xs leading-none">S</span>
-              </div>
-            </div>
-            <span className="text-xl font-bold tracking-tight text-zinc-900">
-              SprX<sup className="text-[10px] text-zinc-400 ml-0.5 font-normal">TM</sup>
-            </span>
+          <Link href="/">
+            <Image src="/SprXstories-Logo.png" alt="SprX Stories" width={120} height={40} className="h-8 w-auto" />
           </Link>
 
           {/* Steps */}

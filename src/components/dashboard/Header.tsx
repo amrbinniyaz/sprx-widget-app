@@ -1,11 +1,11 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { Bell, Search, Plus } from "lucide-react";
+import { Bell, Search } from "lucide-react";
 import { useAuth } from "@/context/auth-context";
 
 const pageTitles: Record<string, { title: string; subtitle: string }> = {
-  "/dashboard": { title: "Dashboard", subtitle: "Welcome back" },
+  "/dashboard": { title: "Dashboard", subtitle: "" },
   "/dashboard/channels": { title: "Channels", subtitle: "Manage your connected social accounts" },
   "/dashboard/stories": { title: "Stories", subtitle: "Curate and manage your content stories" },
   "/dashboard/widgets": { title: "Widgets", subtitle: "Build and embed widgets on any website" },
@@ -19,34 +19,30 @@ export default function Header() {
   const page = pageTitles[pathname] || { title: "SprX™", subtitle: "" };
 
   return (
-    <header className="fixed top-0 right-0 left-[240px] h-16 bg-white/80 backdrop-blur-xl border-b border-zinc-200 z-30 flex items-center px-6 gap-4">
+    <header className="fixed top-6 right-6 left-[295px] h-[72px] bg-white/60 backdrop-blur-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 rounded-[24px] z-30 flex items-center px-8 gap-4 transition-all">
       <div className="flex-1">
-        <h1 className="text-base font-semibold text-zinc-900 leading-none">{page.title}</h1>
+        <h1 className="text-[17px] font-bold text-zinc-900 leading-tight tracking-tight">{page.title}</h1>
         {page.subtitle && (
-          <p className="text-xs text-zinc-400 mt-0.5">
+          <p className="text-[12px] text-zinc-500 mt-0.5 font-medium">
             {page.subtitle}{user?.firstName ? `, ${user.firstName}` : ""}
           </p>
         )}
       </div>
 
       {/* Search */}
-      <div className="hidden md:flex items-center gap-2 px-3 py-2 rounded-xl bg-zinc-100 border border-zinc-200 w-56 cursor-text hover:border-zinc-300 transition-colors">
-        <Search size={13} className="text-zinc-400" />
-        <span className="text-xs text-zinc-400">Search...</span>
-        <kbd className="ml-auto text-[9px] text-zinc-400 bg-white border border-zinc-200 px-1.5 py-0.5 rounded font-mono">⌘K</kbd>
+      <div className="hidden md:flex flex-row items-center gap-2.5 px-4 py-2.5 rounded-[14px] bg-white/50 border border-white hover:bg-white transition-colors w-64 shadow-sm cursor-text group">
+        <Search size={14} className="text-zinc-400 group-hover:text-purple-500 transition-colors" />
+        <span className="text-[13px] text-zinc-400 font-medium">Search anything...</span>
+        <kbd className="ml-auto text-[10px] text-zinc-400 bg-white shadow-sm border border-zinc-100 px-1.5 py-0.5 rounded-md font-mono font-bold">⌘K</kbd>
       </div>
 
       {/* Actions */}
-      <div className="flex items-center gap-2">
-        <button className="relative p-2 rounded-xl hover:bg-zinc-100 transition-colors text-zinc-400 hover:text-zinc-600">
-          <Bell size={16} />
-          <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-brand-coral" />
+      <div className="flex items-center gap-3 pl-2 border-l border-zinc-200/50">
+        <button className="relative w-10 h-10 flex items-center justify-center rounded-[14px] bg-white/50 border border-white hover:bg-white hover:shadow-sm transition-all text-zinc-400 hover:text-zinc-600 group">
+          <Bell size={16} className="group-hover:text-purple-600 transition-colors" />
+          <span className="absolute top-2.5 right-2.5 w-1.5 h-1.5 rounded-full bg-rose-500" />
         </button>
 
-        <button className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-brand-purple hover:bg-purple-700 text-white text-xs font-medium transition-all hover:shadow-md">
-          <Plus size={13} />
-          <span className="hidden sm:inline">New</span>
-        </button>
       </div>
     </header>
   );
