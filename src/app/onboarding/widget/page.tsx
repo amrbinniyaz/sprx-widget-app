@@ -134,12 +134,12 @@ export default function WidgetPage() {
            </h1>
         </div>
         <div className="flex items-center gap-3">
-           <Button variant="ghost" onClick={() => router.push("/onboarding/channel")} className="text-[13px] font-bold text-zinc-500 hover:text-zinc-900 transition-colors h-10 rounded-lg hover:bg-white/50 px-4">
+           <Button variant="ghost" onClick={() => router.push("/onboarding/channel")} className="text-[13px] font-bold text-zinc-500 hover:text-zinc-900 transition-colors h-10 rounded-lg hover:bg-white/50 px-4 gap-2"><ArrowLeft size={14} />
              Back
            </Button>
            <Button onClick={() => {
              toast.success("Widget published. Launching dashboard!");
-             router.push("/dashboard");
+             router.push("/onboarding/plan");
            }} className="bg-purple-600 hover:bg-purple-700 text-white font-bold text-[13px] px-6 h-10 rounded-lg shadow-sm transition-all group overflow-hidden relative">
              <span className="relative z-10 flex items-center justify-center gap-2">
                Publish & Continue <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />

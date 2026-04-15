@@ -35,7 +35,7 @@ export default function SignupPage() {
     setLoading(true);
     try {
       await signup({ ...form });
-      router.push("/onboarding/welcome");
+      router.push("/onboarding/channel");
     } catch {
       toast.error("Something went wrong");
     } finally {

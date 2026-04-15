@@ -245,18 +245,14 @@ export default function ChannelPage() {
         </div>
       </div>
 
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white/40 backdrop-blur-md border border-white rounded-2xl p-4 shadow-sm">
-        <Button variant="ghost" onClick={() => router.push("/onboarding/welcome")} className="text-[13px] font-bold text-zinc-500 hover:text-zinc-900 transition-colors h-[42px] rounded-lg hover:bg-white/50 px-4 gap-2">
-          <ArrowLeft size={16} /> Review Plan
-        </Button>
+      <div className="flex justify-end bg-white/40 backdrop-blur-md border border-white rounded-2xl p-4 shadow-sm">
         <Button onClick={() => {
           if (connected.length === 0) { toast.error("Please connect at least one channel to continue"); return; }
-          router.push("/onboarding/story");
-        }} className="w-full sm:w-auto bg-zinc-900 hover:bg-zinc-800 text-white font-bold text-[14px] px-6 h-[46px] rounded-lg shadow-[0_4px_14px_0_rgba(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)] transition-all duration-300 group overflow-hidden relative">
-          <span className="relative z-10 flex items-center justify-center gap-2 text-white">
+          router.push("/onboarding/widget");
+        }} className="w-full sm:w-auto bg-zinc-900 hover:bg-zinc-800 text-white font-bold text-[14px] px-6 h-[46px] rounded-lg transition-all duration-300 group">
+          <span className="flex items-center justify-center gap-2">
             Continue <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </span>
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-150%] group-hover:translate-x-[150%] transition-transform duration-700 ease-in-out" />
         </Button>
       </div>
     </div>

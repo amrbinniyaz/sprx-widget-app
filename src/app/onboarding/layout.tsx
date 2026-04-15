@@ -6,10 +6,9 @@ import Image from "next/image";
 import { CheckCircle2 } from "lucide-react";
 
 const steps = [
-  { label: "Choose plan", path: "/onboarding/welcome" },
   { label: "Connect channel", path: "/onboarding/channel" },
-  { label: "Create story", path: "/onboarding/story" },
-  { label: "Build widget", path: "/onboarding/widget" },
+  { label: "Build widget",    path: "/onboarding/widget"  },
+  { label: "Choose plan",     path: "/onboarding/plan"    },
 ];
 
 export default function OnboardingLayout({ children }: { children: React.ReactNode }) {
