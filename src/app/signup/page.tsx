@@ -32,8 +32,6 @@ export default function SignupPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.firstName || !form.lastName || !form.school || !form.email || !form.password) { toast.error("Please fill in all required fields"); return; }
-    if (!agreed) { toast.error("Please accept the terms to continue"); return; }
     setLoading(true);
     try {
       await signup({ ...form });
