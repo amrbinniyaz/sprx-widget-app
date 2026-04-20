@@ -133,7 +133,7 @@ export default function DashboardPage() {
         })()}
 
         {/* Platform Breakdown */}
-        <Card className="bg-white/60 backdrop-blur-xl rounded-[24px] p-8 border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-0 border">
+        <Card className="bg-white/60 backdrop-blur-xl rounded-[24px] p-8 border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-0">
           <CardHeader className="p-0 mb-6 border-0">
             <CardTitle className="font-bold text-zinc-900 text-[14px]">Platform Breakdown</CardTitle>
           </CardHeader>
@@ -168,7 +168,7 @@ export default function DashboardPage() {
         </Card>
 
         {/* Recent activity */}
-        <Card className="bg-white/60 backdrop-blur-xl rounded-[24px] p-8 border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-0 border">
+        <Card className="bg-white/60 backdrop-blur-xl rounded-[24px] p-8 border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-0">
           <CardHeader className="p-0 mb-6 border-0 text-left">
              <CardTitle className="font-bold text-zinc-900 text-[14px]">Activity Feed</CardTitle>
           </CardHeader>
@@ -196,7 +196,7 @@ export default function DashboardPage() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
         {statCards.map((card) => (
             <Link key={card.label} href={card.href} className="group">
-              <Card className="h-full bg-white rounded-2xl p-5 border border-zinc-200 hover:border-zinc-300 hover:shadow-md transition-all ring-0 flex flex-col gap-3">
+              <Card className="h-full bg-white/60 backdrop-blur-xl rounded-[20px] p-5 border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all ring-0 flex flex-col gap-3">
                 {/* Top row: label + icon */}
                 <div className="flex items-center justify-between">
                   <p className="text-[13px] font-medium text-zinc-500">{card.label}</p>

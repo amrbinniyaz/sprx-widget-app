@@ -150,6 +150,17 @@ export const mockWidgets = [
     sites: 3,
     embedCode: `<script src="https://cdn.sprx.cloud/widget.js" data-id="wg_3" data-theme="auto"></script>`,
   },
+  {
+    id: "wg_4",
+    name: "Alumni Highlights Wall",
+    layout: "masonry" as const,
+    storyId: "st_3",
+    story: "Alumni Highlights",
+    theme: "light",
+    columns: 3,
+    sites: 1,
+    embedCode: `<script src="https://cdn.sprx.cloud/widget.js" data-id="wg_4" data-theme="light"></script>`,
+  },
 ];
 
 export const mockMetrics = {

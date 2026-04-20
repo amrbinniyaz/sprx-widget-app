@@ -50,10 +50,10 @@ export default function ChannelsPage() {
           const isSyncing = syncing === ch.id;
 
           return (
-            <div key={ch.id} className="bg-white rounded-2xl p-5 border border-zinc-200 hover:border-zinc-300 hover:shadow-md transition-all group">
+            <div key={ch.id} className="bg-white/60 backdrop-blur-xl rounded-[24px] p-5 border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all group">
               {/* Platform icon + status */}
               <div className="flex items-start justify-between mb-4">
-                <div className="w-12 h-12 rounded-xl bg-zinc-50 border border-zinc-100 flex items-center justify-center transition-transform group-hover:scale-110">
+                <div className="w-12 h-12 rounded-xl bg-zinc-100/80 flex items-center justify-center transition-transform group-hover:scale-110">
                   {platformIconMap[ch.platform.toLowerCase()]
                     ? <Icon icon={platformIconMap[ch.platform.toLowerCase()]} width={28} height={28} />
                     : <Wifi size={20} className="text-zinc-400" />
@@ -102,7 +102,7 @@ export default function ChannelsPage() {
         })}
 
         {/* Add new channel card */}
-        <button className="bg-white rounded-2xl p-5 border-2 border-dashed border-zinc-200 hover:border-zinc-400 hover:bg-zinc-50 transition-all group flex flex-col items-center justify-center gap-3 min-h-[200px]">
+        <button className="bg-white/40 backdrop-blur-sm rounded-[24px] p-5 border-2 border-dashed border-zinc-200 hover:border-zinc-400 hover:bg-zinc-50/50 transition-all group flex flex-col items-center justify-center gap-3 min-h-[200px]">
           <div className="w-12 h-12 rounded-xl bg-zinc-100 group-hover:bg-zinc-200 flex items-center justify-center transition-colors">
             <Plus size={20} className="text-zinc-400 group-hover:text-zinc-600 transition-colors" />
           </div>

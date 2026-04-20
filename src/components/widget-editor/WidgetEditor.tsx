@@ -167,7 +167,7 @@ export function WidgetEditor({ onSave, onCancel, initialConfig }: WidgetEditorPr
             onSave(config);
             toast.success("Widget saved successfully!");
           }}
-          className="bg-purple-600 hover:bg-purple-700 text-white font-bold text-[13px] px-6 h-10 rounded-lg shadow-sm transition-all"
+          className=""
         >
           Save Widget
         </Button>

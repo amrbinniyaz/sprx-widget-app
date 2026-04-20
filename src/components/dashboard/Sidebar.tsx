@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/auth-context";
-import { LayoutDashboard, Radio, BookOpen, Puzzle, BarChart3, Settings, LogOut, Zap, ChevronRight } from "lucide-react";
+import { LayoutDashboard, Radio, BookOpen, Puzzle, BarChart3, Settings, LogOut } from "lucide-react";
 import { toast } from "sonner";
 
 const navItems = [
@@ -67,25 +67,26 @@ export default function Sidebar() {
       {/* Bottom Profile Header */}
       <div className="p-4 space-y-3">
         {/* Plan badge */}
-        <div className="p-4 rounded-2xl bg-gradient-to-br from-purple-50 to-teal-50 border border-white/80 shadow-sm relative overflow-hidden">
-          <div className="absolute top-0 right-0 p-2 opacity-10">
-             <Zap size={40} className="text-purple-600" />
+        <div className="px-3 py-3 rounded-2xl bg-white/60 border border-white/60 shadow-[0_2px_8px_rgb(0,0,0,0.04)]">
+          <div className="flex items-center justify-between mb-2.5">
+            <span className="text-[12px] font-semibold text-zinc-800">{user?.plan || "Growth"} Plan</span>
+            <span className="text-[10px] font-medium text-zinc-400">5 / 8</span>
           </div>
-          <div className="relative z-10">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-[13px] font-bold text-zinc-800">{user?.plan || "Growth"} Plan</span>
-            </div>
-            <div className="h-1.5 bg-white rounded-full overflow-hidden mb-2">
-              <div className="h-full w-[62%] bg-gradient-to-r from-purple-500 to-teal-400 rounded-full" />
-            </div>
-            <p className="text-[10px] text-zinc-500 font-medium pb-2">5 / 8 modules active</p>
+          <div className="h-1 bg-zinc-100 rounded-full overflow-hidden">
+            <div className="h-full w-[62%] bg-zinc-900 rounded-full" />
           </div>
+          <p className="text-[10px] text-zinc-400 font-medium mt-2">modules active</p>
         </div>
 
         {/* User Account */}
         <div className="flex items-center gap-3 px-3 py-2.5 rounded-2xl hover:bg-white/60 cursor-pointer transition-all border border-transparent hover:border-white/40 hover:shadow-sm" onClick={handleLogout}>
-          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-teal-400 flex items-center justify-center shadow-inner">
-             <span className="text-white text-[13px] font-bold">{user?.firstName?.[0] || "U"}</span>
+          <div className="w-9 h-9 rounded-xl flex-shrink-0 overflow-hidden bg-zinc-100">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`https://api.dicebear.com/9.x/notionists/svg?seed=${encodeURIComponent(user?.name ?? "User")}&backgroundColor=b6e3f4,c0aede,d1d4f9`}
+              alt={user?.name ?? "Avatar"}
+              className="w-full h-full object-cover"
+            />
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-[13px] font-bold text-zinc-800 truncate">{user?.name || "User"}</p>
