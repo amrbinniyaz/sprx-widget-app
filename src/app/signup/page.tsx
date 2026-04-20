@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { SchoolAutocomplete, type SchoolResult } from "@/components/school-autocomplete";
 import { toast } from "sonner";
 import { Eye, EyeOff, Loader2, CheckCircle2, ArrowRight } from "lucide-react";
 
@@ -27,14 +28,20 @@ export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [agreed, setAgreed] = useState(false);
   const [form, setForm] = useState({ firstName: "", lastName: "", school: "", email: "", password: "", role: "" });
+  const [hubspotSchool, setHubspotSchool] = useState<SchoolResult | null>(null);
 
   const set = (k: string) => (e: React.ChangeEvent<HTMLInputElement>) => setForm((f) => ({ ...f, [k]: e.target.value }));
+
+  const handleSchoolSelect = (school: SchoolResult) => {
+    setHubspotSchool(school);
+    setForm((f) => ({ ...f, school: school.name }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
-      await signup({ ...form });
+      await signup({ ...form, ...(hubspotSchool ? { hubspotCompanyId: hubspotSchool.id } : {}) });
       router.push("/onboarding/channel");
     } catch {
       toast.error("Something went wrong");
@@ -121,7 +128,19 @@ export default function SignupPage() {
             
             <div className="space-y-2 focus-within:text-purple-600 transition-colors group">
               <Label className="text-zinc-500 text-[11px] font-bold uppercase tracking-wider group-focus-within:text-purple-600 transition-colors">School name</Label>
-              <Input value={form.school} onChange={set("school")} placeholder="Oaklands Prep School" className="bg-white/60 border-zinc-200/80 text-zinc-900 placeholder:text-zinc-400 h-[50px] rounded-xl focus-visible:ring-1 focus-visible:ring-purple-500/30 focus-visible:border-purple-500/50 hover:border-zinc-300 hover:bg-white transition-all px-4 shadow-sm" />
+              <SchoolAutocomplete
+                value={form.school}
+                onChange={(v) => {
+                  setForm((f) => ({ ...f, school: v }));
+                  if (hubspotSchool && v !== hubspotSchool.name) setHubspotSchool(null);
+                }}
+                onSelect={handleSchoolSelect}
+              />
+              {hubspotSchool?.city && (
+                <p className="text-[11px] text-purple-600 font-medium pl-1 flex items-center gap-1">
+                  <CheckCircle2 size={11} /> {[hubspotSchool.city, hubspotSchool.country].filter(Boolean).join(", ")} — matched from your records
+                </p>
+              )}
             </div>
             
             <div className="space-y-2 focus-within:text-purple-600 transition-colors group">
@@ -131,7 +150,7 @@ export default function SignupPage() {
             
             <div className="space-y-2 focus-within:text-purple-600 transition-colors group">
               <Label className="text-zinc-500 text-[11px] font-bold uppercase tracking-wider group-focus-within:text-purple-600 transition-colors">Your role</Label>
-              <Select onValueChange={(v) => setForm((f) => ({ ...f, role: v }))}>
+              <Select onValueChange={(v: string | null) => setForm((f) => ({ ...f, role: v ?? "" }))}>
                 <SelectTrigger className="bg-white/60 border-zinc-200/80 text-zinc-900 h-[50px] rounded-xl focus:ring-1 focus:ring-purple-500/30 focus:border-purple-500/50 hover:border-zinc-300 hover:bg-white transition-all px-4 shadow-sm outline-none">
                   <SelectValue placeholder="Select your role..." />
                 </SelectTrigger>
@@ -156,7 +175,10 @@ export default function SignupPage() {
             <div className="flex items-start gap-3 pt-3">
               <Checkbox id="terms" checked={agreed} onCheckedChange={(c) => setAgreed(!!c)} className="mt-0.5 border-zinc-300 focus:ring-purple-500/20 hover:border-zinc-400 bg-white/60 outline-none w-[22px] h-[22px] rounded-[6px] data-[state=checked]:bg-zinc-900 data-[state=checked]:border-zinc-900 data-[state=checked]:text-white transition-all text-white shadow-sm" />
               <Label htmlFor="terms" className="text-[13px] text-zinc-500 cursor-pointer leading-relaxed font-medium">
-                By creating an account, you agree to our <a href="#" className="text-zinc-900 hover:text-purple-600 transition-colors border-b border-zinc-300 hover:border-purple-400 pb-0.5">Terms of Service</a> and <a href="#" className="text-zinc-900 hover:text-purple-600 transition-colors border-b border-zinc-300 hover:border-purple-400 pb-0.5">Privacy Policy</a>.
+                I agree to the{" "}
+                <a href="#" className="text-zinc-900 hover:text-purple-600 transition-colors underline underline-offset-2 decoration-zinc-300 hover:decoration-purple-400 whitespace-nowrap">Terms of Service</a>
+                {" "}and{" "}
+                <a href="#" className="text-zinc-900 hover:text-purple-600 transition-colors underline underline-offset-2 decoration-zinc-300 hover:decoration-purple-400 whitespace-nowrap">Privacy Policy</a>.
               </Label>
             </div>
             

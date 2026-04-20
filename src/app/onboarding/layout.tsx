@@ -3,12 +3,11 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { CheckCircle2 } from "lucide-react";
 
 const steps = [
   { label: "Connect channel", path: "/onboarding/channel" },
   { label: "Build widget",    path: "/onboarding/widget"  },
-  { label: "Choose plan",     path: "/onboarding/plan"    },
+  { label: "Publish",          path: "/onboarding/plan"    },
 ];
 
 export default function OnboardingLayout({ children }: { children: React.ReactNode }) {
@@ -33,27 +32,34 @@ export default function OnboardingLayout({ children }: { children: React.ReactNo
           </Link>
 
           {/* Steps */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center">
             {steps.map((step, i) => {
               const done = i < currentIndex;
               const active = i === currentIndex;
               return (
                 <div key={i} className="flex items-center">
-                  <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
-                    active ? "bg-white/80 text-purple-600 shadow-sm border border-white/50" :
-                    done ? "text-zinc-500 hover:text-zinc-700" : "text-zinc-400"
+                  <div className={`flex items-center gap-2.5 px-4 py-2 rounded-full text-[13px] font-semibold transition-all duration-300 ${
+                    active
+                      ? "bg-zinc-900 text-white"
+                      : done
+                      ? "text-green-600"
+                      : "text-zinc-400"
                   }`}>
-                    {done ? (
-                      <CheckCircle2 size={14} className="text-purple-500" />
-                    ) : (
-                      <span className={`w-[18px] h-[18px] rounded-full flex items-center justify-center text-[9px] border ${
-                        active ? "border-purple-600 bg-purple-600 text-white shadow-sm" : "border-zinc-300 text-zinc-400"
-                      }`}>{i + 1}</span>
-                    )}
+                    <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 ${
+                      active
+                        ? "bg-white/15 text-white"
+                        : done
+                        ? "bg-green-500 text-white"
+                        : "border border-zinc-300 text-zinc-400"
+                    }`}>
+                      {done ? "✓" : i + 1}
+                    </span>
                     {step.label}
                   </div>
                   {i < steps.length - 1 && (
-                    <div className={`w-8 h-[2px] mx-1 rounded-full transition-colors duration-500 ${i < currentIndex ? "bg-purple-600/30" : "bg-zinc-200/50"}`} />
+                    <div className="relative mx-2 w-14 h-[2px] rounded-full bg-zinc-200/70 overflow-hidden">
+                      <div className={`absolute inset-y-0 left-0 rounded-full bg-zinc-400 transition-all duration-700 ${i < currentIndex ? "w-full" : "w-0"}`} />
+                    </div>
                   )}
                 </div>
               );
