@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import { mockStories } from "@/lib/mock-data";
 import { Icon } from "@iconify/react";
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card";
@@ -411,6 +412,13 @@ export default function DataPage() {
               <Icon icon="solar:refresh-linear" width={12} className={loading ? "animate-spin" : ""} />
             </button>
           </div>
+          <Link
+            href="/dashboard/data/sources"
+            className="flex items-center gap-1.5 text-xs font-semibold text-zinc-700 border border-zinc-200 bg-white rounded-lg px-3 py-1.5 hover:bg-zinc-50 hover:border-zinc-300 transition-colors"
+          >
+            <Icon icon="solar:database-bold-duotone" width={13} />
+            Manage sources
+          </Link>
           <div className="flex items-center gap-1 bg-zinc-900 text-white text-xs font-semibold px-3 py-1.5 rounded-lg">
             <Icon icon="solar:chart-bold-duotone" width={13} className="opacity-70" />
             <span>10M</span>
