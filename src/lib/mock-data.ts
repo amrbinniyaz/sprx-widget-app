@@ -163,6 +163,140 @@ export const mockWidgets = [
   },
 ];
 
+export type AppModuleStatus = "active" | "early-access" | "coming-soon";
+
+export type AppModuleAccent =
+  | "violet"
+  | "teal"
+  | "amber"
+  | "rose"
+  | "indigo"
+  | "emerald"
+  | "sky"
+  | "fuchsia";
+
+export type AppModule = {
+  id: string;
+  name: string;
+  tagline: string;
+  status: AppModuleStatus;
+  accent: AppModuleAccent;
+  icon: string;
+  href?: string;
+};
+
+export const appModules: AppModule[] = [
+  {
+    id: "stories",
+    name: "Stories",
+    tagline: "Turn your social feed into on-site widgets",
+    status: "active",
+    accent: "violet",
+    icon: "solar:gallery-wide-bold-duotone",
+    href: "/dashboard",
+  },
+  {
+    id: "newsletter",
+    name: "Dynamic Newsletter",
+    tagline: "AI-personalised newsletters on autopilot",
+    status: "early-access",
+    accent: "fuchsia",
+    icon: "solar:letter-opened-bold-duotone",
+  },
+  {
+    id: "chatbot",
+    name: "AI Chatbot",
+    tagline: "24/7 support trained on your content",
+    status: "early-access",
+    accent: "indigo",
+    icon: "solar:chat-round-dots-bold-duotone",
+  },
+  {
+    id: "admissions",
+    name: "Admissions",
+    tagline: "Enrolment forms and applicant tracking",
+    status: "coming-soon",
+    accent: "teal",
+    icon: "solar:document-add-bold-duotone",
+  },
+  {
+    id: "athletics",
+    name: "Athletics",
+    tagline: "Live schedules, scores, and rosters",
+    status: "coming-soon",
+    accent: "rose",
+    icon: "solar:basketball-bold-duotone",
+  },
+  {
+    id: "campaigns",
+    name: "Campaign Landing Pages",
+    tagline: "High-converting pages for drives",
+    status: "coming-soon",
+    accent: "amber",
+    icon: "solar:target-bold-duotone",
+  },
+  {
+    id: "trackers",
+    name: "Campaign Trackers",
+    tagline: "Goal thermometers with live totals",
+    status: "coming-soon",
+    accent: "emerald",
+    icon: "solar:chart-bold-duotone",
+  },
+  {
+    id: "countdown",
+    name: "Countdown Timers",
+    tagline: "Open-day countdowns that build urgency",
+    status: "coming-soon",
+    accent: "sky",
+    icon: "solar:calendar-minimalistic-bold-duotone",
+  },
+];
+
+export type OnboardingStep = {
+  id: string;
+  label: string;
+  description: string;
+  icon: string;
+  href: string;
+  done: boolean;
+};
+
+export const onboardingSteps: OnboardingStep[] = [
+  {
+    id: "connect-channel",
+    label: "Connect a channel",
+    description: "Link Instagram, X, LinkedIn, or any social account",
+    icon: "solar:link-bold-duotone",
+    href: "/dashboard/channels",
+    done: true,
+  },
+  {
+    id: "create-story",
+    label: "Create your first story",
+    description: "Curate posts into a branded feed",
+    icon: "solar:book-bookmark-bold-duotone",
+    href: "/dashboard/stories",
+    done: true,
+  },
+  {
+    id: "build-widget",
+    label: "Build your first widget",
+    description: "Pick a layout and theme that matches your site",
+    icon: "solar:widget-bold-duotone",
+    href: "/dashboard/widgets",
+    done: false,
+  },
+  {
+    id: "embed-site",
+    label: "Embed on your website",
+    description: "Paste one line of code — your feed goes live",
+    icon: "solar:code-square-bold-duotone",
+    href: "/dashboard/widgets",
+    done: false,
+  },
+];
+
 export const mockMetrics = {
   impressions: 142800,
   impressionsDelta: 12.4,
